@@ -7,7 +7,7 @@ from datetime import datetime
 from neuxus.pipeline import run
 
 
-def main():
+def run_pipeline():
     parser = argparse.ArgumentParser(
         description="# NeuXus main script")
     parser.add_argument(

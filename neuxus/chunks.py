@@ -28,7 +28,7 @@ class Port(KeepRefs):
         self._data = []
 
     def set_parameters(self, data_type, channels, sampling_frequency, meta={}, epoching_frequency=None):
-        """Set channels, samplingfrequency and meta data"""
+        """Set channels, sampling frequency and meta data"""
         assert data_type in ['signal', 'epoch', 'vector', 'marker', 'spectrum']
         self.data_type = data_type
         self.channels = channels

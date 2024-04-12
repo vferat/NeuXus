@@ -4,7 +4,6 @@ import os
 import logging
 import threading
 import queue
-import numpy as np
 from pynput import keyboard
 
 from neuxus.chunks import Port

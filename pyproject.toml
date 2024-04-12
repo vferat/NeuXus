@@ -20,8 +20,11 @@ classifiers = [
 ]
 dependencies = [
   'mne',
+  'joblib',
+  'pandas',
   'numba',
   'pylsl',
+  'pynput',
   'pyserial',
   'pyxdf',
   'packaging',
@@ -89,7 +92,7 @@ test = [
 ]
 
 [project.scripts]
-neuxus-sys_info = 'neuxus.main:main'
+neuxus = 'neuxus.commands.run:run_pipeline'
 
 [project.urls]
 documentation = 'https://github.com/melhk/NeuXus'
