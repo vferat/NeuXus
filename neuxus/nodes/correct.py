@@ -48,6 +48,7 @@ class GA(Node):
                     self.building_start_time = marker.index[(marker_values == self.start_marker)[:, 0]][0]
                     self.find_start_marker = False
                     self.found_start_marker = True
+                    logging.info('found_start_marker')
 
         for chunk in self.input:
             clim1 = 0
@@ -55,8 +56,9 @@ class GA(Node):
             if not self.found_start_point:
                 if self.found_start_marker:
                     clim1 = bisect_left(chunk.index, self.building_start_time)
-                    if clim1 < len(chunk):                                      # If the current data times alerady reached or passed the start marker time
+                    if clim1 <= len(chunk):                                      # If the current data times already reached or passed the start marker time
                         self.found_start_point = True
+                        logging.info('found_start_point')
             # GA-correct
             if self.found_start_point:
                 # Send a marker to mark the start of the GA building
@@ -64,6 +66,7 @@ class GA(Node):
                     if not self.found_start_marker:
                         self.building_start_time = chunk.index[0]
                     self.marker_output.set(['Start of GA building'], [self.building_start_time])
+                    logging.info(f'Start of GA building: {self.building_start_time}')
                     self.building_start = False
 
                 lchunk = len(chunk)
@@ -99,6 +102,7 @@ class GA(Node):
             if self.subtracting_start:
                 self.subtracting_start_time = chunk.index[clim1]
                 self.marker_output.set(['Start of GA subtraction'], [self.subtracting_start_time])
+                logging.info(f'Start of GA subtraction: {self.subtracting_start_time}')
                 self.subtracting_start = False
 
         return pd.DataFrame(data=mat, index=chunk.index, columns=chunk.columns)
